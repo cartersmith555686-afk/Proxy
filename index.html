@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nebula Unblocker</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,13 +11,11 @@
     <div class="matrix-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
-            <div class="brand">
-                <span class="logo-icon">🪐</span> NEBULA
-            </div>
+            <div class="brand"><span>🪐</span> NEBULA</div>
             <nav class="nav-menu">
                 <button class="tab-btn active" data-target="proxy-panel">🌐 Proxy</button>
                 <button class="tab-btn" data-target="apps-panel">📱 Apps</button>
-                <button class="tab-btn" data-target="chat-panel">💬 Global Chat</button>
+                <button class="tab-btn" data-target="chat-panel">💬 Chat</button>
                 <button class="tab-btn" data-target="ai-panel">🤖 Nova AI</button>
                 <button class="tab-btn" data-target="settings-panel">⚙️ Settings</button>
             </nav>
@@ -26,60 +24,127 @@
             </div>
         </aside>
 
-        <!-- Main Display Views -->
+        <!-- Main Display Content -->
         <main class="main-content">
             
-            <!-- 1. Proxy View -->
+            <!-- Proxy View -->
             <section id="proxy-panel" class="view-panel active">
                 <div class="hero">
                     <h1>Unblock the<br><span class="glow-text">Universe</span></h1>
-                    <p class="subtitle">Fast, anonymous, and fully customizable proxy browser wrapper.</p>
+                    <p class="subtitle">Fast, anonymous, and customizable proxy browser wrapper.</p>
                     <div class="search-box">
-                        <span class="link-icon">🔗</span>
-                        <input type="text" placeholder="Enter URL or search freely...">
+                        <span>🔗</span>
+                        <input type="text" id="proxy-input" placeholder="Enter URL or search freely...">
+                        <button id="proxy-launch-btn">Launch</button>
                     </div>
-                    <p class="tip">💡 Tip: Tabbed proxying runs directly inside our isolated sandbox frame.</p>
+                    <p class="tip">💡 Pro-Tip: Press the <strong>Escape (ESC)</strong> key anytime to trigger Panic Mode!</p>
                 </div>
             </section>
 
-            <!-- 2. Apps View -->
+            <!-- Apps view -->
             <section id="apps-panel" class="view-panel">
-                <h2>Apps Dashboard</h2>
-                <div class="apps-grid">
-                    <div class="app-card">TikTok</div>
-                    <div class="app-card">Netflix</div>
-                    <div class="app-card">Instagram</div>
-                    <div class="app-card">Discord</div>
+                <h2 class="section-title">Apps Dashboard</h2>
+                
+                <div class="category-block">
+                    <h3 class="category-title">🌐 Communication & Socials</h3>
+                    <div class="apps-grid">
+                        <div class="app-card" data-url="https://discord.com"><div class="app-icon">👾</div><div class="app-name">Discord</div></div>
+                        <div class="app-card" data-url="https://tiktok.com"><div class="app-icon">🎵</div><div class="app-name">TikTok</div></div>
+                        <div class="app-card" data-url="https://instagram.com"><div class="app-icon">📸</div><div class="app-name">Instagram</div></div>
+                        <div class="app-card" data-url="https://x.com"><div class="app-icon">🐦</div><div class="app-name">X</div></div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <h3 class="category-title">🎬 Media & Entertainment</h3>
+                    <div class="apps-grid">
+                        <div class="app-card" data-url="https://youtube.com"><div class="app-icon">📺</div><div class="app-name">YouTube</div></div>
+                        <div class="app-card" data-url="https://netflix.com"><div class="app-icon">🍿</div><div class="app-name">Netflix</div></div>
+                        <div class="app-card" data-url="https://twitch.tv"><div class="app-icon">🎮</div><div class="app-name">Twitch</div></div>
+                        <div class="app-card" data-url="https://kick.com"><div class="app-icon">🟢</div><div class="app-name">Kick</div></div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <h3 class="category-title">🕹️ Gaming Portals</h3>
+                    <div class="apps-grid">
+                        <div class="app-card" data-url="https://roblox.com"><div class="app-icon">🟥</div><div class="app-name">Roblox</div></div>
+                        <div class="app-card" data-url="https://poki.com"><div class="app-icon">🎲</div><div class="app-name">Poki</div></div>
+                        <div class="app-card" data-url="https://crazygames.com"><div class="app-icon">⚡</div><div class="app-name">CrazyGames</div></div>
+                        <div class="app-card" data-url="https://chess.com"><div class="app-icon">♟️</div><div class="app-name">Chess.com</div></div>
+                    </div>
                 </div>
             </section>
 
-            <!-- 3. Global Chat View -->
+            <!-- Chat View -->
             <section id="chat-panel" class="view-panel">
-                <h2>Global Chat Lounge</h2>
+                <h2 class="section-title">Global Chat Lounge</h2>
                 <div class="chat-container">
-                    <div class="chat-messages" id="chat-box"></div>
+                    <div class="chat-messages" id="chat-box">
+                        <div class="chat-msg system">[System] Secure peer node online. Welcome to the matrix chat floor!</div>
+                    </div>
                     <div class="chat-input-bar">
-                        <input type="text" id="chat-input" placeholder="Broadcast a peer message...">
+                        <input type="text" id="chat-input" placeholder="Broadcast a message...">
                         <button id="send-chat-btn">Send</button>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. Nova AI View -->
+            <!-- AI Core Terminal -->
             <section id="ai-panel" class="view-panel">
-                <h2>Nova AI Core</h2>
+                <h2 class="section-title">Nova AI Terminal Core</h2>
                 <div class="ai-container">
-                    <p>Ask Nova anything regarding web systems or general tasks.</p>
+                    <div class="ai-response-log" id="ai-log">
+                        <div class="ai-text"><strong>Nova AI:</strong> System initialized. Ask me how to configure bypass filters, setups, or styles.</div>
+                    </div>
+                    <div class="ai-input-bar">
+                        <input type="text" id="ai-input" placeholder="Ask Nova Core something...">
+                        <button id="ask-ai-btn">Query</button>
+                    </div>
                 </div>
             </section>
 
-            <!-- 5. Settings View -->
+            <!-- Settings View -->
             <section id="settings-panel" class="view-panel">
-                <h2>Customization Matrix</h2>
+                <h2 class="section-title">Customization Matrix</h2>
+                
+                <!-- Tab Cloaking Component -->
                 <div class="settings-group">
-                    <h3>Select Theme</h3>
-                    <button class="theme-picker" data-theme="theme-nebula">Nebula Dark</button>
-                    <button class="theme-picker" data-theme="theme-cherri">Cherri Glow</button>
+                    <h3>🎭 Stealth Tab Cloaking</h3>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Mask your tab details instantly in school or work environments.</p>
+                    <div class="themes-flex">
+                        <button class="cloak-picker" data-title="Google Classroom" data-icon="https://gstatic.com">Classroom</button>
+                        <button class="cloak-picker" data-title="Google Drive" data-icon="https://gstatic.com">Google Drive</button>
+                        <button class="cloak-picker" data-title="Home | Canvas" data-icon="https://cloudfront.net">Canvas</button>
+                        <button class="cloak-picker" id="reset-cloak">Reset Tab</button>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Select Core Theme</h3>
+                    <div class="themes-flex">
+                        <button class="theme-picker active" data-theme="theme-nebula">Nebula Dark</button>
+                        <button class="theme-picker" data-theme="theme-cherri">Cherri Glow</button>
+                        <button class="theme-picker" data-theme="theme-lunaar">Lunaar Eclipse</button>
+                        <button class="theme-picker" data-theme="theme-utopia">Utopia Matrix</button>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Select Interface Font</h3>
+                    <div class="fonts-flex">
+                        <button class="font-picker active" data-font="font-cyber">Cyber Minimal</button>
+                        <button class="font-picker" data-font="font-scifi">Sci-Fi Term</button>
+                        <button class="font-picker" data-font="font-clean">System Flat</button>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Identity Node Profile</h3>
+                    <div class="account-box">
+                        <input type="text" id="username-input" placeholder="Enter custom handle...">
+                        <button id="save-user-btn">Sync Identity</button>
+                    </div>
                 </div>
             </section>
 
