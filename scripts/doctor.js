@@ -4,7 +4,7 @@ const checks = [
   ["@titaniumnetwork-dev/ultraviolet", (m) => typeof m.uvPath === "string", "uvPath"],
   ["@mercuryworkshop/epoxy-transport", (m) => typeof m.epoxyPath === "string", "epoxyPath"],
   ["@mercuryworkshop/bare-mux/node", (m) => typeof m.baremuxPath === "string", "baremuxPath"],
-  ["@mercuryworkshop/wisp-server-node", (m) => typeof m.server?.routeRequest === "function", "server.routeRequest"],
+  ["@mercuryworkshop/wisp-js/server", (m) => typeof m.server?.routeRequest === "function", "server.routeRequest"],
 ];
 
 import fs from "node:fs";
