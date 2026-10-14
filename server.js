@@ -7,7 +7,7 @@ import { Server as IOServer } from "socket.io";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
-import { server as wisp } from "@mercuryworkshop/wisp-server-node";
+import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 
 import { createStore } from "./lib/store.js";
 import { createAuth } from "./lib/auth.js";
@@ -92,7 +92,11 @@ Object.assign(wisp.options, {
   allow_private_ips: false,
   allow_udp_streams: false,
 });
-if (process.env.WISP_DNS) wisp.options.dns_servers = process.env.WISP_DNS.split(",").map((s) => s.trim());
+if (process.env.WISP_DNS) {
+  // wisp-js only uses dns_servers when dns_method is "resolve"
+  wisp.options.dns_method = "resolve";
+  wisp.options.dns_servers = process.env.WISP_DNS.split(",").map((s) => s.trim()).filter(Boolean);
+}
 
 server.on("upgrade", (req, socket, head) => {
   if (req.url?.startsWith("/socket.io/")) return; // handled by socket.io
