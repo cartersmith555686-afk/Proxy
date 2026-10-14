@@ -27,7 +27,7 @@ git init
 git add .
 git commit -m "Orbit"
 git branch -M main
-git remote add origin https://github.com/<you>/<repo>.git
+git remote add origin https://github.com/cartersmith555686-afk/Proxy.git
 git push -u origin main
 ```
 
