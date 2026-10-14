@@ -141,6 +141,8 @@ html[data-light="1"] #address { background: rgba(255, 255, 255, 0.6); }
 /* Viewport */
 #viewport { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 #frames, #home { position: absolute; inset: 0; }
+#frames { pointer-events: none; } /* FIX: empty layer sits on top of #home; let taps pass through */
+.frame { pointer-events: auto; } /* FIX */
 .frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
 
 /* Home */
