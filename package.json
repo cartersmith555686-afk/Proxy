@@ -1,0 +1,24 @@
+{
+  "name": "orbit-hub",
+  "version": "1.0.0",
+  "description": "Orbit - a tabbed web hub with a built-in proxy, live per-site chat, a configurable free AI, optional accounts and deep customization.",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "doctor": "node scripts/doctor.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@mercuryworkshop/bare-mux": "*",
+    "@mercuryworkshop/epoxy-transport": "*",
+    "@mercuryworkshop/wisp-server-node": "*",
+    "@titaniumnetwork-dev/ultraviolet": "*",
+    "express": "^4.21.0",
+    "socket.io": "^4.8.0"
+  }
+}
