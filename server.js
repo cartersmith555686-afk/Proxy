@@ -5,8 +5,6 @@ import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { Server as IOServer } from "socket.io";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
-import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
-import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 
 import { createStore } from "./lib/store.js";
@@ -16,6 +14,12 @@ import { registerAI } from "./lib/ai.js";
 import { rateLimit } from "./lib/util.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// The newest epoxy-transport / bare-mux don't export their folder paths, so find the
+// folder holding each package's browser files (dist/) from where the package resolves.
+const distOf = (pkg) => path.dirname(fileURLToPath(import.meta.resolve(pkg)));
+const epoxyPath = distOf("@mercuryworkshop/epoxy-transport");
+const baremuxPath = distOf("@mercuryworkshop/bare-mux");
 const PORT = Number(process.env.PORT) || 3000;
 const isProd = process.env.NODE_ENV === "production" || !!process.env.RENDER;
 
