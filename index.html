@@ -3,182 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebula Proxy | Ultimate Web Proxy & Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    <title>Nebula Unblocker</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="nebula-dark" data-font="rajdhani">
-    <div class="stars"></div>
-    <div class="glowing-orb"></div>
+<body class="theme-nebula font-cyber">
 
-    <div class="sidebar">
-        <div class="logo">
-            <span class="logo-icon">🪐</span> NEBULA
-        </div>
-        <nav class="nav-menu">
-            <button class="nav-btn active" data-tab="proxy"><span class="btn-icon">🌐</span> Proxy</button>
-            <button class="nav-btn" data-tab="apps"><span class="btn-icon">📱</span> Apps</button>
-            <button class="nav-btn" data-tab="chat"><span class="btn-icon">💬</span> Global Chat</button>
-            <button class="nav-btn" data-tab="ai"><span class="btn-icon">🤖</span> Nova AI</button>
-            <button class="nav-btn" data-tab="settings"><span class="btn-icon">⚙️</span> Settings</button>
-        </nav>
-        <div class="user-profile-section">
-            <div id="user-status" class="user-status" onclick="openAuthModal()">
-                <span class="status-dot"></span> <span id="username-display">Guest Account</span>
+    <div class="matrix-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="logo-icon">🪐</span> NEBULA
             </div>
-        </div>
-    </div>
+            <nav class="nav-menu">
+                <button class="tab-btn active" data-target="proxy-panel">🌐 Proxy</button>
+                <button class="tab-btn" data-target="apps-panel">📱 Apps</button>
+                <button class="tab-btn" data-target="chat-panel">💬 Global Chat</button>
+                <button class="tab-btn" data-target="ai-panel">🤖 Nova AI</button>
+                <button class="tab-btn" data-target="settings-panel">⚙️ Settings</button>
+            </nav>
+            <div class="user-status">
+                <span class="status-dot"></span> <span id="user-display">Guest Account</span>
+            </div>
+        </aside>
 
-    <main class="main-content">
-        <!-- Proxy Tab -->
-        <section id="tab-proxy" class="tab-content active">
-            <div class="hero-section">
-                <h1>Unblock the <span class="gradient-text">Universe</span></h1>
-                <p>Fast, anonymous, and fully customizable proxy browser wrapper.</p>
-                <div class="proxy-bar">
-                    <span class="proxy-icon">🔗</span>
-                    <input type="text" id="proxy-input" placeholder="Enter URL or search freely...">
-                    <button id="proxy-go-btn">Launch</button>
-                </div>
-                <div class="proxy-tips">
-                    <span>💡 Tip: Tabbed proxying runs directly inside our isolated sandbox frame.</span>
-                </div>
-            </div>
-            <div class="browser-container" id="browser-container" style="display: none;">
-                <div class="browser-header">
-                    <div class="browser-controls">
-                        <button id="browser-back">◀</button>
-                        <button id="browser-reload">🔄</button>
+        <!-- Main Display Views -->
+        <main class="main-content">
+            
+            <!-- 1. Proxy View -->
+            <section id="proxy-panel" class="view-panel active">
+                <div class="hero">
+                    <h1>Unblock the<br><span class="glow-text">Universe</span></h1>
+                    <p class="subtitle">Fast, anonymous, and fully customizable proxy browser wrapper.</p>
+                    <div class="search-box">
+                        <span class="link-icon">🔗</span>
+                        <input type="text" placeholder="Enter URL or search freely...">
                     </div>
-                    <div class="browser-address" id="browser-address-bar">about:blank</div>
-                    <button id="browser-close">❌ Close View</button>
+                    <p class="tip">💡 Tip: Tabbed proxying runs directly inside our isolated sandbox frame.</p>
                 </div>
-                <iframe id="proxy-iframe" src=""></iframe>
-            </div>
-        </section>
+            </section>
 
-        <!-- Apps Tab -->
-        <section id="tab-apps" class="tab-content">
-            <div class="section-header">
-                <h2>Pre-configured <span class="gradient-text">Apps</span></h2>
-                <p>One-click optimized direct proxy pipelines for popular platforms.</p>
-            </div>
-            <div class="apps-grid">
-                <div class="app-card" onclick="launchApp('https://www.tiktok.com')">
-                    <div class="app-icon text-tiktok">🎵</div>
-                    <h3>TikTok</h3>
-                    <p>Watch and share trending videos seamlessly.</p>
+            <!-- 2. Apps View -->
+            <section id="apps-panel" class="view-panel">
+                <h2>Apps Dashboard</h2>
+                <div class="apps-grid">
+                    <div class="app-card">TikTok</div>
+                    <div class="app-card">Netflix</div>
+                    <div class="app-card">Instagram</div>
+                    <div class="app-card">Discord</div>
                 </div>
-                <div class="app-card" onclick="launchApp('https://www.netflix.com')">
-                    <div class="app-icon text-netflix">🎬</div>
-                    <h3>Netflix</h3>
-                    <p>Stream your favorite movies and shows.</p>
-                </div>
-                <div class="app-card" onclick="launchApp('https://www.instagram.com')">
-                    <div class="app-icon text-insta">📸</div>
-                    <h3>Instagram</h3>
-                    <p>Browse feeds, stories, and explore media.</p>
-                </div>
-                <div class="app-card" onclick="launchApp('https://discord.com')">
-                    <div class="app-icon text-discord">👾</div>
-                    <h3>Discord</h3>
-                    <p>Chat, hang out, and stay connected.</p>
-                </div>
-                <div class="app-card" onclick="launchApp('https://www.youtube.com')">
-                    <div class="app-icon text-yt">📺</div>
-                    <h3>YouTube</h3>
-                    <p>Unblocked video playback sandbox.</p>
-                </div>
-                <div class="app-card" onclick="launchApp('https://twitter.com')">
-                    <div class="app-icon text-x">𝕏</div>
-                    <h3>X / Twitter</h3>
-                    <p>Access global feeds and breaking updates.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Chat Tab -->
-        <section id="tab-chat" class="tab-content">
-            <div class="section-header">
-                <h2>Interstellar <span class="gradient-text">Chat Network</span></h2>
-                <p>Real-time anonymous global lounge powered by localStorage simulation.</p>
-            </div>
-            <div class="chat-container">
-                <div class="chat-messages" id="chat-messages">
-                    <div class="chat-bubble system">🚀 Welcome to Nebula Lounge. Say hello to everyone online!</div>
+            <!-- 3. Global Chat View -->
+            <section id="chat-panel" class="view-panel">
+                <h2>Global Chat Lounge</h2>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-box"></div>
+                    <div class="chat-input-bar">
+                        <input type="text" id="chat-input" placeholder="Broadcast a peer message...">
+                        <button id="send-chat-btn">Send</button>
+                    </div>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Type an encoded broadcast message...">
-                    <button id="chat-send-btn">Send</button>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- AI Tab -->
-        <section id="tab-ai" class="tab-content">
-            <div class="section-header">
-                <h2>Nova <span class="gradient-text">AI Core</span></h2>
-                <p>Your local proxy-assistant. Ask for links, bypass methods, or game codes.</p>
-            </div>
-            <div class="ai-container">
-                <div class="ai-messages" id="ai-messages">
-                    <div class="chat-bubble ai">🤖 Greetings. I am Nova, your custom built-in system utility AI. How can I assist you today?</div>
+            <!-- 4. Nova AI View -->
+            <section id="ai-panel" class="view-panel">
+                <h2>Nova AI Core</h2>
+                <div class="ai-container">
+                    <p>Ask Nova anything regarding web systems or general tasks.</p>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" id="ai-input" placeholder="Ask Nova anything...">
-                    <button id="ai-send-btn">Process</button>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Settings Tab -->
-        <section id="tab-settings" class="tab-content">
-            <div class="section-header">
-                <h2>System <span class="gradient-text">Customization</span></h2>
-                <p>Modify interface matrices, telemetry fonts, and user records.</p>
-            </div>
-            <div class="settings-box">
-                <h3>Interface Matrix Themes</h3>
-                <div class="theme-picker">
-                    <button class="theme-btn active" data-theme="nebula-dark" style="background: linear-gradient(135deg, #09090e, #140727);">Nebula Dark</button>
-                    <button class="theme-btn" data-theme="cherri-glow" style="background: linear-gradient(135deg, #12020a, #2e0817);">Cherri Glow</button>
-                    <button class="theme-btn" data-theme="lunaar-eclipse" style="background: linear-gradient(135deg, #020b14, #081b2e);">Lunaar Eclipse</button>
-                    <button class="theme-btn" data-theme="utopia-matrix" style="background: linear-gradient(135deg, #020c02, #072207);">Utopia Matrix</button>
+            <!-- 5. Settings View -->
+            <section id="settings-panel" class="view-panel">
+                <h2>Customization Matrix</h2>
+                <div class="settings-group">
+                    <h3>Select Theme</h3>
+                    <button class="theme-picker" data-theme="theme-nebula">Nebula Dark</button>
+                    <button class="theme-picker" data-theme="theme-cherri">Cherri Glow</button>
                 </div>
+            </section>
 
-                <h3>Font Topology</h3>
-                <div class="font-picker">
-                    <button class="font-btn active" data-font="rajdhani">Rajdhani (Sci-Fi)</button>
-                    <button class="font-btn" data-font="orbitron">Orbitron (Cyber)</button>
-                    <button class="font-btn" data-font="inter">Inter (Sleek Clean)</button>
-                </div>
-
-                <h3>Data Sync & Accounts</h3>
-                <div class="account-card-settings">
-                    <p>Current session data is saved locally. Create a profile to locks preferences permanently.</p>
-                    <button class="action-btn" onclick="openAuthModal()">Manage Account Matrix</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Auth Modal -->
-    <div id="auth-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
-            <h2 id="modal-title">Access Profile Registry</h2>
-            <form id="auth-form" onsubmit="handleAuth(event)">
-                <div class="input-group">
-                    <label for="auth-username">Quantum Username</label>
-                    <input type="text" id="auth-username" required placeholder="Enter username">
-                </div>
-                <div class="input-group">
-                    <label for="auth-password">Security Key (Password)</label>
-                    <input type="password" id="auth-password" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="submit-btn" id="modal-submit-btn">Initialize Sync</button>
-            </form>
-        </div>
+        </main>
     </div>
 
     <script src="script.js"></script>
