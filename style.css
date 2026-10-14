@@ -1,15 +1,12 @@
-/* ==========================================================================
-   1. RESET & VARIABLE DEFINITIONS
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-    /* Theme: Nebula Dark (Default) */
     --bg-main: #0a0516;
     --bg-sidebar: #05020b;
     --bg-card: #120b24;
@@ -19,12 +16,8 @@
     --text-muted: #847999;
     --accent-glow: #a855f7;
     --accent-glow-rgb: 168, 85, 247;
-    
-    /* Font Vectors */
-    --font-cyber: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
-/* Alternate Theme Modifiers */
 body.theme-cherri {
     --bg-main: #120207;
     --bg-sidebar: #080003;
@@ -55,21 +48,16 @@ body.theme-utopia {
     --accent-glow-rgb: 57, 255, 20;
 }
 
-/* Custom Font Alternative Overrides */
 body.font-scifi { font-family: 'Courier New', Courier, monospace; }
 body.font-clean { font-family: -apple-system, sans-serif; }
-body.font-cyber { font-family: var(--font-cyber); }
+body.font-cyber { font-family: 'Segoe UI', Roboto, sans-serif; }
 
-/* ==========================================================================
-   2. CORE SYSTEM LAYOUT
-   ========================================================================== */
 body {
     background-color: var(--bg-main);
     color: var(--text-primary);
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    transition: background-color 0.4s ease;
 }
 
 .matrix-container {
@@ -78,36 +66,28 @@ body {
     height: 100%;
 }
 
-/* ==========================================================================
-   3. SIDEBAR NAVIGATION PANELS
-   ========================================================================== */
 .sidebar {
-    width: 280px;
+    width: 240px;
     background-color: var(--bg-sidebar);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    padding: 30px 20px;
+    padding: 25px 15px;
     justify-content: space-between;
-    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .brand {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 800;
-    letter-spacing: 3px;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(var(--accent-glow-rgb), 0.3);
 }
 
 .nav-menu {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 40px;
+    gap: 6px;
+    margin-top: 30px;
     flex-grow: 1;
 }
 
@@ -115,244 +95,90 @@ body {
     background: transparent;
     border: 1px solid transparent;
     color: var(--text-muted);
-    padding: 14px 16px;
+    padding: 12px;
     text-align: left;
     font-size: 0.95rem;
-    font-weight: 500;
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    gap: 14px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 12px;
+    transition: all 0.2s ease;
 }
 
-.tab-btn:hover {
-    color: var(--text-primary);
-    background-color: rgba(var(--accent-glow-rgb), 0.05);
-}
-
-.tab-btn.active {
-    color: var(--text-primary);
-    background-color: rgba(var(--accent-glow-rgb), 0.12);
-    border-color: rgba(var(--accent-glow-rgb), 0.3);
-    box-shadow: 0 0 20px rgba(var(--accent-glow-rgb), 0.1);
-}
+.tab-btn:hover { color: var(--text-primary); background: rgba(var(--accent-glow-rgb), 0.04); }
+.tab-btn.active { color: var(--text-primary); background: rgba(var(--accent-glow-rgb), 0.1); border-color: rgba(var(--accent-glow-rgb), 0.25); }
 
 .user-status {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 12px;
-    background-color: var(--bg-card);
+    background: var(--bg-card);
     border-radius: 10px;
     border: 1px solid var(--border-color);
     font-size: 0.85rem;
-    color: var(--text-muted);
 }
 
-.status-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--accent-glow);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--accent-glow);
-}
+.status-dot { width: 8px; height: 8px; background: var(--accent-glow); border-radius: 50%; box-shadow: 0 0 8px var(--accent-glow); }
 
-/* ==========================================================================
-   4. CONTENT HUB CONTROLLER
-   ========================================================================== */
 .main-content {
     flex: 1;
     position: relative;
-    padding: 50px;
+    padding: 30px;
     overflow-y: auto;
 }
 
-/* The absolute magic sauce for your tab system */
-.view-panel {
-    display: none; /* Invisible by default */
-    width: 100%;
-    animation: fadeIn 0.4s ease forwards;
-}
+.view-panel { display: none; width: 100%; }
+.view-panel.active { display: block; }
 
-.view-panel.active {
-    display: block; /* Visible when selected */
-}
+.section-title { font-size: 1.5rem; margin-bottom: 20px; border-left: 4px solid var(--accent-glow); padding-left: 10px; }
+.category-block { margin-bottom: 25px; }
+.category-title { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
 
-/* ==========================================================================
-   5. VIEW SECTIONS DECORATIONS
-   ========================================================================== */
+.hero { max-width: 550px; margin: 15vh auto 0 auto; text-align: center; }
+.hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; }
+.glow-text { color: var(--accent-glow); text-shadow: 0 0 20px rgba(var(--accent-glow-rgb), 0.4); }
+.subtitle { color: var(--text-muted); margin-bottom: 30px; }
 
-/* 5.1 Proxy/Home Layout View */
-.hero {
-    max-width: 700px;
-    margin: 10vh auto 0 auto;
-    text-align: center;
-}
+.search-box { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 30px; padding: 6px 15px; display: flex; align-items: center; gap: 10px; }
+.search-box input { background: transparent; border: none; outline: none; color: #fff; flex-grow: 1; height: 35px; }
+.search-box button { background: var(--accent-glow); border: none; color: #fff; padding: 6px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; }
+.tip { margin-top: 15px; font-size: 0.8rem; color: var(--text-muted); }
 
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 15px;
-    letter-spacing: -1px;
-}
+.apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+.app-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.2s ease; }
+.app-card:hover { transform: translateY(-3px); border-color: var(--accent-glow); }
+.app-icon { font-size: 1.8rem; margin-bottom: 5px; }
+.app-name { font-size: 0.85rem; font-weight: 600; }
 
-.glow-text {
-    color: var(--accent-glow);
-    text-shadow: 0 0 25px rgba(var(--accent-glow-rgb), 0.5);
-}
+.chat-container, .ai-container { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; height: 55vh; display: flex; flex-direction: column; overflow: hidden; }
+.chat-messages, .ai-response-log { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; }
+.chat-msg, .ai-text { padding: 8px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+.chat-msg.system { color: var(--accent-glow); border-left: 2px solid var(--accent-glow); }
+.chat-input-bar, .ai-input-bar { display: flex; padding: 10px; background: var(--bg-sidebar); border-top: 1px solid var(--border-color); gap: 8px; }
+.chat-input-bar input, .ai-input-bar input { flex-grow: 1; background: var(--bg-input); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 8px; color: #fff; outline: none; }
+.chat-input-bar button, .ai-input-bar button { background: var(--accent-glow); color: #fff; border: none; padding: 0 15px; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
-.subtitle {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-}
+.settings-group { background: var(--bg-card); border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; margin-bottom: 12px; }
+.settings-group h3 { font-size: 0.95rem; margin-bottom: 10px; color: var(--text-muted); }
+.themes-flex, .fonts-flex { display: flex; flex-wrap: wrap; gap: 8px; }
+.theme-picker, .font-picker, .cloak-picker { background: var(--bg-input); color: #fff; border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+.theme-picker.active, .font-picker.active, .cloak-picker.active { border-color: var(--accent-glow); background: rgba(var(--accent-glow-rgb), 0.15); }
+.account-box { display: flex; gap: 8px; max-width: 350px; }
+.account-box input { flex-grow: 1; background: var(--bg-input); border: 1px solid var(--border-color); padding: 8px; border-radius: 6px; color: #fff; outline: none; }
+.account-box button { background: var(--accent-glow); border: none; color: white; padding: 0 12px; border-radius: 6px; cursor: pointer; }
 
-.search-box {
-    background-color: var(--bg-input);
-    border: 1px solid var(--border-color);
-    border-radius: 50px;
-    padding: 6px 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.search-box:focus-within {
-    border-color: var(--accent-glow);
-    box-shadow: 0 0 20px rgba(var(--accent-glow-rgb), 0.2);
-}
-
-.search-box input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text-primary);
-    width: 100%;
-    height: 45px;
-    font-size: 1rem;
-}
-
-.tip {
-    margin-top: 25px;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-/* 5.2 Apps Grid Section */
-.apps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.app-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 30px 20px;
-    text-align: center;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.app-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-glow);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-/* 5.3 Global Shared Chat View */
-.chat-container {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    height: 400px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.chat-messages {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.chat-input-bar {
-    display: flex;
-    padding: 15px;
-    background-color: var(--bg-sidebar);
-    border-top: 1px solid var(--border-color);
-    gap: 10px;
-}
-
-.chat-input-bar input {
-    flex-grow: 1;
-    background-color: var(--bg-input);
-    border: 1px solid var(--border-color);
-    padding: 12px;
-    border-radius: 8px;
-    color: #fff;
-    outline: none;
-}
-
-.chat-input-bar button {
-    background-color: var(--accent-glow);
-    color: #fff;
-    border: none;
-    padding: 0 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-/* 5.4 Settings Engine Controls */
-.settings-group {
-    margin-top: 30px;
-    background-color: var(--bg-card);
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-}
-
-.settings-group h3 {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
-
-.theme-picker {
-    background-color: var(--bg-input);
-    color: #fff;
-    border: 1px solid var(--border-color);
-    padding: 10px 20px;
-    margin-right: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.theme-picker:hover {
-    border-color: var(--accent-glow);
-}
-
-/* ==========================================================================
-   6. ANIMATION RENDERS
-   ========================================================================== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@media (max-width: 768px) {
+    .matrix-container { flex-direction: column-reverse; }
+    .sidebar { width: 100%; height: 60px; flex-direction: row; padding: 5px; border-right: none; border-top: 1px solid var(--border-color); }
+    .brand, .user-status { display: none; }
+    .nav-menu { flex-direction: row; width: 100%; margin-top: 0; justify-content: space-around; }
+    .tab-btn { flex-direction: column; font-size: 0.65rem; padding: 4px; gap: 2px; flex: 1; text-align: center; justify-content: center; }
+    .main-content { padding: 15px; height: calc(100vh - 60px); }
+    .hero { margin: 8vh auto 0 auto; }
+    .hero h1 { font-size: 1.8rem; }
+    .apps-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; }
+    .app-icon { font-size: 1.4rem; }
+    .app-name { font-size: 0.7rem; }
 }
