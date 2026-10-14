@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" data-light="0">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Orbit</title>
+  <link rel="icon" id="favicon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link id="gfont" rel="stylesheet" href="" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-bg="aurora">
+  <div id="bgAurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div id="bgImage" aria-hidden="true"></div>
+
+  <div id="app">
+    <!-- Dock -->
+    <aside id="dock" class="glass">
+      <div class="logo" title="Orbit"><span data-i="orbit" data-s="26"></span></div>
+      <button class="dock-btn" id="btnHome" title="Home" aria-label="Home"><span data-i="home"></span></button>
+      <button class="dock-btn" data-panel="chat" title="Chat" aria-label="Chat"><span data-i="chat"></span><b class="badge" id="chatBadge" hidden>0</b></button>
+      <button class="dock-btn" data-panel="ai" title="AI" aria-label="AI assistant"><span data-i="spark"></span></button>
+      <button class="dock-btn" data-panel="settings" title="Customize" aria-label="Settings"><span data-i="gear"></span></button>
+      <span class="grow"></span>
+      <button class="dock-btn" data-panel="account" title="Account" aria-label="Account"><span data-i="user"></span></button>
+    </aside>
+
+    <!-- Browser -->
+    <main id="main">
+      <div id="tabbar">
+        <div id="tabs" role="tablist"></div>
+        <button class="icon-btn glass" id="newTab" title="New tab" aria-label="New tab"><span data-i="plus"></span></button>
+      </div>
+
+      <div id="toolbar" class="glass">
+        <button class="icon-btn" id="back" title="Back" aria-label="Back"><span data-i="back"></span></button>
+        <button class="icon-btn" id="fwd" title="Forward" aria-label="Forward"><span data-i="fwd"></span></button>
+        <button class="icon-btn" id="reload" title="Reload" aria-label="Reload"><span data-i="reload"></span></button>
+        <form id="addressForm" autocomplete="off">
+          <span class="addr-ico" data-i="globe" data-s="16"></span>
+          <input id="address" type="text" spellcheck="false" placeholder="Search or enter a web address" aria-label="Address" />
+        </form>
+        <button class="icon-btn" id="fullscreen" title="Fullscreen" aria-label="Fullscreen"><span data-i="expand"></span></button>
+      </div>
+
+      <div id="viewport" class="glass">
+        <section id="home"></section>
+        <div id="frames"></div>
+      </div>
+    </main>
+
+    <!-- Side panel -->
+    <aside id="panel" class="glass" hidden>
+      <header class="panel-head">
+        <h2 id="panelTitle"></h2>
+        <button class="icon-btn" id="panelClose" title="Close" aria-label="Close panel"><span data-i="x"></span></button>
+      </header>
+
+      <section class="view" id="view-chat" hidden>
+        <div class="chat-top">
+          <div class="seg" id="chatScope">
+            <button data-scope="site" class="on">This site</button>
+            <button data-scope="global">Everyone</button>
+          </div>
+          <div class="chat-meta"><span id="chatRoom">Lobby</span><span class="dot"></span><span id="chatCount">1 online</span></div>
+        </div>
+        <div id="chatList" class="chat-list" aria-live="polite"></div>
+        <form id="chatForm" class="composer" autocomplete="off">
+          <input id="chatInput" maxlength="300" placeholder="Say something…" aria-label="Message" />
+          <button class="send" type="submit" aria-label="Send"><span data-i="send"></span></button>
+        </form>
+      </section>
+
+      <section class="view" id="view-ai" hidden>
+        <div class="ai-head"><span id="aiEmoji">✨</span><div><b id="aiName">Nova</b><small>Free AI assistant · tune it in Customize</small></div><button class="btn ghost small" id="aiClear">Clear</button></div>
+        <div id="aiLog" class="chat-list"></div>
+        <form id="aiForm" class="composer" autocomplete="off">
+          <input id="aiInput" maxlength="1000" placeholder="Ask anything, or try “open tiktok”…" aria-label="Ask the AI" />
+          <button class="send" type="submit" aria-label="Send"><span data-i="send"></span></button>
+        </form>
+      </section>
+
+      <section class="view scroll" id="view-settings" hidden></section>
+      <section class="view scroll" id="view-account" hidden></section>
+    </aside>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <!-- Proxy runtime (classic scripts, globals) -->
+  <script src="/uv/uv.bundle.js"></script>
+  <script src="/uv/uv.config.js"></script>
+  <script src="/baremux/index.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
