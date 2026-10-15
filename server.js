@@ -12,6 +12,7 @@ import { createAuth } from "./lib/auth.js";
 import { registerChat } from "./lib/chat.js";
 import { registerAI } from "./lib/ai.js";
 import { rateLimit } from "./lib/util.js";
+import { ICONS } from "./lib/icons.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -41,6 +42,11 @@ app.disable("x-powered-by");
 app.get("/healthz", (_req, res) => res.type("text").send("ok"));
 
 // ---- Static files. public/ is first so public/uv/uv.config.js overrides the package default.
+app.get("/icons/:name.png", (req, res) => {
+  const b64 = ICONS[req.params.name];
+  if (!b64) return res.status(404).end();
+  res.set("Cache-Control", "public, max-age=86400").type("png").send(Buffer.from(b64, "base64"));
+});
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uv/", express.static(uvPath));
 app.use("/epoxy/", express.static(epoxyPath));
